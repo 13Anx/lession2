@@ -58,7 +58,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable log-gen.service
 sudo systemctl start log-gen.service
 
-3. Настройка ротации логов (logrotate)
+# 3. Настройка ротации логов (logrotate)
 Чтобы файл log.txt не занимал все свободное место, настроим logrotate.
 
 sudo nano /etc/logrotate.d/app-logger
