@@ -1,38 +1,30 @@
 ---
-- name: Install and configure Nginx web server
+- name: Install and configure Nginx
   hosts: all
   become: true
   tasks:
-    - name: Update all system packages to the latest version
+    - name: Update all system packages
+      # Использование модуля apt для Debian/Ubuntu систем
       ansible.builtin.apt:
         update_cache: true
         upgrade: dist
         cache_valid_time: 3600
 
-    - name: Ensure Nginx is installed
+    - name: Install Nginx package
       ansible.builtin.apt:
         name: nginx
         state: present
 
-    - name: Create a custom index.html page
-      ansible.builtin.copy:
-        content: |
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <title>Custom Nginx Page</title>
-          </head>
-          <body>
-              <h1>Nginx has been configured via Ansible</h1>
-          </body>
-          </html>
-        dest: /var/www/html/index.html
-        owner: www-data
-        group: www-data
-        mode: '0644'
-
-    - name: Ensure Nginx service is running and enabled
+    - name: Ensure Nginx service is started and enabled
       ansible.builtin.service:
         name: nginx
         state: started
         enabled: true
+
+    - name: Change default Nginx index page
+      ansible.builtin.copy:
+        content: "<h1>Welcome to the Custom Nginx Page</h1>\n"
+        dest: /var/www/html/index.nginx-debian.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
