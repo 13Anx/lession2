@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Update all system packages
-      # Использование модуля apt для Debian/Ubuntu систем
+      # Использование модуля apt для Ubuntu систем
       ansible.builtin.apt:
         update_cache: true
         upgrade: dist
