@@ -1,3 +1,4 @@
+Написать ansible-playbook
 ---
 - name: Install and configure Nginx
   hosts: all
